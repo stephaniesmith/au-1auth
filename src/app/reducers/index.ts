@@ -14,13 +14,18 @@ interface AuthState {
   user: User;
 }
 
+const initialAuthState: AuthState = {
+  loggedIn: false,
+  user: undefined
+};
+
 export interface AppState {
   auth: AuthState;
   // courses: CoursesState;
   // lessons: LessonsState;
 }
 
-function authReducer(state: AuthState, { type, payload }): AuthState {
+function authReducer(state: AuthState = initialAuthState, { type, payload }): AuthState {
   switch (type) {
     case AuthActionTypes.LoginAction:
       return { loggedIn: true, user: payload.user };
