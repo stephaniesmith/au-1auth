@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {select, Store} from "@ngrx/store";
-import {Observable} from "rxjs";
+import {select, Store} from '@ngrx/store';
+import {Observable} from 'rxjs';
+import { AuthState } from './auth/auth.reducer';
+import { Logout } from './auth/auth.actions';
 
 @Component({
   selector: 'app-root',
@@ -9,19 +11,16 @@ import {Observable} from "rxjs";
 })
 export class AppComponent implements OnInit {
 
+  constructor(private store: Store<AuthState>) {
+
+  }
+
+  ngOnInit() {
 
 
-    constructor() {
+  }
 
-    }
-
-    ngOnInit() {
-
-
-    }
-
-    logout() {
-    }
-
-
+  logout() {
+    this.store.dispatch(new Logout());
+  }
 }

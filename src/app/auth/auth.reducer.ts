@@ -10,13 +10,13 @@ export interface AuthState {
 
 export const initialAuthState: AuthState = {
   loggedIn: false,
-  user: undefined
+  user: null
 };
 
 export function reducer(state = initialAuthState, { type, payload }: AuthActions): AuthState {
   switch (type) {
     case AuthActionTypes.LoginAction:
-      return { loggedIn: true, user: payload.user };
+      return { loggedIn: true, user: payload };
     case AuthActionTypes.LogoutAction:
       return { loggedIn: false, user: null };
     default:
