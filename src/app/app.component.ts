@@ -5,6 +5,7 @@ import { AuthState } from './auth/auth.reducer';
 import { Logout } from './auth/auth.actions';
 import { map } from 'rxjs/operators';
 import { AppState } from './reducers';
+import { isLoggedIn, isLoggedOut } from './auth/auth.selectors';
 
 @Component({
   selector: 'app-root',
@@ -21,8 +22,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isLoggedIn$ = this.store.pipe(map(({ auth }) => auth.loggedIn));
-    this.isLoggedOut$ = this.store.pipe(map(({ auth }) => !auth.loggedIn));
+    this.isLoggedIn$ = this.store.pipe(select(isLoggedIn));
+    this.isLoggedOut$ = this.store.pipe(select(isLoggedOut));
   }
 
   logout() {
