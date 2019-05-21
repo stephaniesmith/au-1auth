@@ -13,7 +13,7 @@ export const initialAuthState: AuthState = {
   user: null
 };
 
-export function reducer(state = initialAuthState, { type, payload }: AuthActions): AuthState {
+export function reducer(state = initialAuthState, { type, payload }): AuthState {
   switch (type) {
     case AuthActionTypes.LoginAction:
       return { loggedIn: true, user: payload };
