@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Login, AuthActionTypes } from './auth.actions';
+import { Login, AuthActionTypes, Logout } from './auth.actions';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { defer, of, Observable } from 'rxjs';
 
 
 @Injectable()
@@ -22,6 +23,17 @@ export class AuthEffects {
       this.router.navigateByUrl('/login');
     })
   );
+
+  @Effect()
+  init$ = defer((): Observable<any> => {
+    const userData = localStorage.getItem('user');
+
+    if (userData) {
+      return of(new Login(JSON.parse(userData).user));
+    } else {
+      return of(new Logout());
+    }
+  });
 
   constructor(
     private actions$: Actions,
