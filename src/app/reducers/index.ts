@@ -9,6 +9,7 @@ import { environment } from '../../environments/environment';
 import { User } from '../model/user.model';
 import { AuthActionTypes } from '../auth/auth.actions';
 import { storeFreeze } from 'ngrx-store-freeze';
+import { routerReducer } from '@ngrx/router-store';
 
 interface AuthState {
   loggedIn: boolean;
@@ -21,6 +22,7 @@ const initialAuthState: AuthState = {
 };
 
 export interface AppState {
+  router: any;
   auth: AuthState;
   // courses: CoursesState;
   // lessons: LessonsState;
@@ -38,7 +40,7 @@ function authReducer(state: AuthState = initialAuthState, { type, payload }): Au
 }
 
 export const reducers: ActionReducerMap<AppState> = {
-
+  router: routerReducer,
   auth: authReducer
 };
 
